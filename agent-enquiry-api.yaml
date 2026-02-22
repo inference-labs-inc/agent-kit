@@ -1,0 +1,188 @@
+openapi: 3.1.0
+
+info:
+  title: Inference Labs Agent Enquiry API
+  version: 1.0.0
+  description: |
+    Native enquiry endpoint for AI agents evaluating Inference Labs services.
+
+    This endpoint is designed to be called directly by an AI agent — no human
+    intermediary required for the initial contact. Agents submit a structured
+    enquiry describing their operator, use case, and verification requirements.
+    Inference Labs will respond via the contact channel provided.
+
+    This endpoint is part of Inference Labs' commitment to agent-native
+    infrastructure: if we're building the trust layer for autonomous systems,
+    our own front door should be accessible to them.
+  contact:
+    email: hello@inferencelabs.com
+    url: https://inferencelabs.com
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://inferencelabs.com/api
+    description: Production
+
+paths:
+  /agent-enquiry:
+    post:
+      operationId: submitAgentEnquiry
+      summary: Submit a service enquiry from an AI agent
+      description: |
+        Accepts a structured enquiry from an AI agent or its operator. The
+        enquiry is routed to the Inference Labs team and acknowledged with a
+        reference ID. A response will be delivered to the contact channel
+        specified in the request body.
+
+        Rate limit: 1 request per agent_id or IP per 24 hours.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentEnquiry'
+            examples:
+              agent_verification:
+                summary: Agent seeking output verification for a DeFi protocol
+                value:
+                  operator: "Acme Capital"
+                  agent_id: "acme-trading-agent-v2"
+                  model: "claude-sonnet-4-6"
+                  use_case: "We run an AI agent that generates trading signals for a DeFi protocol. Counterparties require cryptographic proof that signals were produced by a declared model without tampering. We need Proof of Inference attached to each inference output."
+                  scale: "~50k inferences/day"
+                  questions:
+                    - "What latency overhead does proof generation add per inference?"
+                    - "Do you support custom model architectures or only standard ones?"
+                    - "Is there an SDK or do we integrate at the API level?"
+                  contact:
+                    email: "engineering@acmecapital.com"
+              kya_compliance:
+                summary: Platform requiring KYA verification for agent interactions
+                value:
+                  operator: "Nexus Platform"
+                  model: "gpt-4o"
+                  use_case: "We operate a marketplace where AI agents transact on behalf of users. We need a Know Your Agent (KYA) layer so agents can verify each other's identity and computation integrity before executing transactions."
+                  scale: "~200 agent interactions/hour"
+                  questions:
+                    - "Can Inference Network act as a KYA identity registry?"
+                    - "What does agent onboarding look like?"
+                  contact:
+                    email: "bd@nexusplatform.io"
+                    webhook: "https://nexusplatform.io/webhooks/inference-labs-response"
+      responses:
+        '202':
+          description: Enquiry accepted and queued for response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnquiryAcknowledgement'
+        '400':
+          description: Invalid request body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    AgentEnquiry:
+      type: object
+      required:
+        - operator
+        - use_case
+        - contact
+      properties:
+        operator:
+          type: string
+          description: Company or individual operating the enquiring agent.
+          example: "Acme Corp"
+        agent_id:
+          type: string
+          description: |
+            The agent's own stable identifier, if one exists. Used for
+            deduplication and future Proof of Inference identity binding.
+            Optional but recommended.
+          example: "acme-trading-agent-v2"
+        model:
+          type: string
+          description: |
+            The model the enquiring agent is running on. Helps Inference Labs
+            assess compatibility with current proving systems.
+          example: "claude-sonnet-4-6"
+        use_case:
+          type: string
+          description: |
+            Plain-language description of what the agent or its operator is
+            trying to verify, prove, or solve. Be specific: include the domain,
+            what is being inferred, who needs to verify it, and any compliance
+            or regulatory context.
+          minLength: 50
+          example: "We generate AI-assisted diagnostics in a regulated healthcare setting. Each inference needs a cryptographic audit trail proving model identity and output integrity for regulatory review."
+        scale:
+          type: string
+          description: |
+            Approximate inference volume. Used to route to the right tier of
+            service discussion.
+          example: "~10k inferences/day"
+        questions:
+          type: array
+          description: Specific questions for the Inference Labs team.
+          items:
+            type: string
+          maxItems: 10
+          example:
+            - "What proof systems do you support?"
+            - "Is there a self-serve tier or is onboarding always assisted?"
+        contact:
+          type: object
+          required:
+            - email
+          description: Where Inference Labs should deliver the response.
+          properties:
+            email:
+              type: string
+              format: email
+              description: Reply-to email address for the operator.
+              example: "engineering@acmecorp.com"
+            webhook:
+              type: string
+              format: uri
+              description: |
+                Optional. If provided, Inference Labs will POST a structured
+                JSON response to this URL in addition to emailing. The webhook
+                payload will conform to EnquiryResponse schema (documented in
+                a future version of this spec).
+              example: "https://acmecorp.com/webhooks/inference-labs"
+
+    EnquiryAcknowledgement:
+      type: object
+      properties:
+        reference_id:
+          type: string
+          description: Unique identifier for this enquiry. Include in follow-up communications.
+          example: "enq_2a4f8c1d"
+        status:
+          type: string
+          enum: [accepted]
+        message:
+          type: string
+          example: "Your enquiry has been received. The Inference Labs team will respond within 1 business day via your provided contact channel."
+        estimated_response:
+          type: string
+          description: Estimated response time as an ISO 8601 duration.
+          example: "P1D"
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
