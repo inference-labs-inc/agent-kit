@@ -130,51 +130,6 @@ app.get('/api/', async (c) => {
   return c.json({ message: 'Hello, world!' });
 });
 
-app.get('/agent-kit/:filename', async (c) => {
-  const filename = c.req.param('filename');
-
-  if (!PROXIED_FILES.has(filename)) {
-    return c.json({ error: 'not_found', message: 'File not available at this endpoint.' }, 404);
-  }
-
-  const cache = caches.default;
-  const cacheKey = new Request(c.req.url);
-
-  const cached = await cache.match(cacheKey);
-  if (cached) {
-    const dateHeader = cached.headers.get('Date');
-    const age = dateHeader
-      ? Math.max(0, Math.floor((Date.now() - new Date(dateHeader).getTime()) / 1000))
-      : 0;
-    const headers = new Headers(cached.headers);
-    headers.set('Age', String(age));
-    headers.set('X-Cache', 'HIT');
-    return new Response(cached.body, { status: cached.status, headers });
-  }
-
-  const ext = filename.split('.').pop() ?? '';
-  const contentType = CONTENT_TYPES[ext] ?? 'application/octet-stream';
-  const githubUrl = `${GITHUB_RAW_BASE}/${filename}`;
-
-  const upstream = await fetch(githubUrl);
-  const body = await upstream.arrayBuffer();
-
-  const responseHeaders = new Headers({
-    'Content-Type': contentType,
-    'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600',
-    'X-Cache': 'MISS',
-  });
-
-  // Cache 2xx and 4xx; skip 5xx so transient GitHub errors don't poison the cache
-  if (upstream.status < 500) {
-    c.executionCtx.waitUntil(
-      cache.put(cacheKey, new Response(body.slice(0), { status: upstream.status, headers: responseHeaders }))
-    );
-  }
-
-  return new Response(body, { status: upstream.status, headers: responseHeaders });
-});
-
 app.post('/api/agent-enquiry', async (c) => {
   let rawBody: unknown;
   try {
@@ -254,6 +209,51 @@ app.post('/api/agent-enquiry', async (c) => {
     },
     202
   );
+});
+
+app.get('/:filename', async (c) => {
+  const filename = c.req.param('filename');
+
+  if (!PROXIED_FILES.has(filename)) {
+    return c.json({ error: 'not_found', message: 'File not available at this endpoint.' }, 404);
+  }
+
+  const cache = caches.default;
+  const cacheKey = new Request(c.req.url);
+
+  const cached = await cache.match(cacheKey);
+  if (cached) {
+    const dateHeader = cached.headers.get('Date');
+    const age = dateHeader
+      ? Math.max(0, Math.floor((Date.now() - new Date(dateHeader).getTime()) / 1000))
+      : 0;
+    const headers = new Headers(cached.headers);
+    headers.set('Age', String(age));
+    headers.set('X-Cache', 'HIT');
+    return new Response(cached.body, { status: cached.status, headers });
+  }
+
+  const ext = filename.split('.').pop() ?? '';
+  const contentType = CONTENT_TYPES[ext] ?? 'application/octet-stream';
+  const githubUrl = `${GITHUB_RAW_BASE}/${filename}`;
+
+  const upstream = await fetch(githubUrl);
+  const body = await upstream.arrayBuffer();
+
+  const responseHeaders = new Headers({
+    'Content-Type': contentType,
+    'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600',
+    'X-Cache': 'MISS',
+  });
+
+  // Cache 2xx and 4xx; skip 5xx so transient GitHub errors don't poison the cache
+  if (upstream.status < 500) {
+    c.executionCtx.waitUntil(
+      cache.put(cacheKey, new Response(body.slice(0), { status: upstream.status, headers: responseHeaders }))
+    );
+  }
+
+  return new Response(body, { status: upstream.status, headers: responseHeaders });
 });
 
 export default app;
