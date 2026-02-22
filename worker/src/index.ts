@@ -126,6 +126,10 @@ const app = new Hono<{ Bindings: Env }>();
 
 app.use('*', cors({ origin: '*' }));
 
+app.get('/api/', async (c) => {
+  return c.json({ message: 'Hello, world!' });
+});
+
 app.get('/agent-kit/:filename', async (c) => {
   const filename = c.req.param('filename');
 
