@@ -1,0 +1,189 @@
+{
+  "$schema": "https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/design-tokens.schema.json",
+  "$metadata": {
+    "name": "Inference Labs Design Tokens",
+    "version": "1.0.0",
+    "description": "Machine-readable design tokens for Inference Labs / Inference Network. Import into Tailwind, CSS-in-JS, Figma Tokens, or Style Dictionary.",
+    "sources": {
+      "brandGuide": "https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/inference-labs-brand-guide.md",
+      "notionBrandKit": "https://inferencelabs.notion.site/brandkit",
+      "website": "https://inferencelabs.com"
+    }
+  },
+  "color": {
+    "brand": {
+      "dark": {
+        "value": "#0d110f",
+        "description": "Primary dark background. Near-black with a slight green tint. Use for page backgrounds in dark mode, headings on light surfaces.",
+        "usage": ["background", "heading", "dark-mode-surface"]
+      },
+      "light": {
+        "value": "#efeeea",
+        "description": "Primary light background. Off-white/cream. Use for page backgrounds in light mode, light-mode surfaces.",
+        "usage": ["background", "light-mode-surface"]
+      },
+      "accent": {
+        "value": "#04f7a4",
+        "description": "Brand accent. Neon cyan-green. Use sparingly: CTAs, highlights, active states, data emphasis. NEVER as a large-area background.",
+        "usage": ["cta", "highlight", "active-state", "data-emphasis"],
+        "prohibited": ["large-area-background", "full-page-background"]
+      }
+    },
+    "neutral": {
+      "black": {
+        "value": "#000000",
+        "description": "Pure black. Use for borders, dividers, high-contrast UI elements.",
+        "usage": ["border", "divider", "high-contrast"]
+      },
+      "white": {
+        "value": "#ffffff",
+        "description": "Pure white. Use for text on dark surfaces, container backgrounds, inverse surfaces.",
+        "usage": ["text-on-dark", "container", "inverse-surface"]
+      },
+      "gray-mid": {
+        "value": "#a3a3a3",
+        "description": "Medium gray. Use for secondary text, disabled states.",
+        "usage": ["secondary-text", "disabled"]
+      },
+      "gray-light": {
+        "value": "#cbcbc8",
+        "description": "Light gray. Use for subtle borders, placeholder text.",
+        "usage": ["subtle-border", "placeholder"]
+      }
+    },
+    "overlay": {
+      "dark-strong": {
+        "value": "#000000e6",
+        "description": "Modal backdrops. 90% black.",
+        "usage": ["modal-backdrop"]
+      },
+      "dark-mid": {
+        "value": "#0d110fb3",
+        "description": "Card overlays. Brand dark at 70%.",
+        "usage": ["card-overlay"]
+      },
+      "dark-light": {
+        "value": "#0d110f66",
+        "description": "Subtle hover tints. Brand dark at 40%.",
+        "usage": ["hover-tint"]
+      },
+      "white-mid": {
+        "value": "#ffffff80",
+        "description": "Text on dark images. White at 50%.",
+        "usage": ["text-on-image"]
+      },
+      "white-subtle": {
+        "value": "#ffffff1a",
+        "description": "Ghost buttons, borders on dark. White at ~10%.",
+        "usage": ["ghost-button", "border-on-dark"]
+      },
+      "input-bg": {
+        "value": "#bbbbbb26",
+        "description": "Form field fill.",
+        "usage": ["input-background"]
+      },
+      "border-subtle": {
+        "value": "#00000026",
+        "description": "Dividers, card outlines. Black at ~15%.",
+        "usage": ["divider", "card-outline"]
+      }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "display": {
+        "value": "'Host Grotesk', sans-serif",
+        "weights": [300, 400, 700],
+        "source": "https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;700&display=swap",
+        "description": "Display and heading typeface. Use for hero copy, feature names, H1, H2, pull quotes — anything that needs to feel like a brand moment."
+      },
+      "body": {
+        "value": "'Inter', sans-serif",
+        "weights": [400, 600, 700, 900],
+        "source": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap",
+        "description": "Body and UI typeface. Use for all functional copy: body text, navigation, forms, labels, tables, H3 and below."
+      },
+      "mono": {
+        "value": "'Fragment Mono', monospace",
+        "weights": [400],
+        "source": "https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap",
+        "description": "Monospace typeface. Use EXCLUSIVELY for: code, cryptographic hashes, proof strings, wallet addresses, CLI output, numerical data requiring precision."
+      }
+    },
+    "scale": {
+      "hero": {
+        "fontFamily": "display",
+        "fontWeight": 700,
+        "letterSpacing": "-0.02em",
+        "description": "Hero / display copy. Large-format marketing headlines."
+      },
+      "h1": {
+        "fontFamily": "display",
+        "fontWeight": 700,
+        "letterSpacing": "-0.02em",
+        "description": "Page titles."
+      },
+      "h2": {
+        "fontFamily": "display",
+        "fontWeight": 400,
+        "letterSpacing": "-0.01em",
+        "description": "Section headings."
+      },
+      "h3": {
+        "fontFamily": "body",
+        "fontWeight": 700,
+        "letterSpacing": "0em",
+        "description": "Subsection headings."
+      },
+      "body": {
+        "fontFamily": "body",
+        "fontWeight": 400,
+        "letterSpacing": "0em",
+        "description": "General prose and content."
+      },
+      "label": {
+        "fontFamily": "body",
+        "fontWeight": 600,
+        "letterSpacing": "0em",
+        "description": "UI labels, navigation items, small text. Uppercase optional."
+      },
+      "code": {
+        "fontFamily": "mono",
+        "fontWeight": 400,
+        "letterSpacing": "0em",
+        "description": "Code, hashes, addresses, proof strings, CLI output."
+      }
+    },
+    "rules": [
+      "Letter spacing must always be tight (-0.02em) to neutral (0em). Never use loose/expanded tracking.",
+      "Do not use Host Grotesk for body copy — it is display-only.",
+      "Do not use Inter for hero headlines — Host Grotesk carries brand authority.",
+      "Fragment Mono is mandatory for cryptographic strings, never use a proportional font for these."
+    ]
+  },
+  "spacing": {
+    "scale": [10, 12, 20, 24, 32, 40],
+    "unit": "px",
+    "description": "Use only these values for padding, margin, and gap. Do not use arbitrary spacing values.",
+    "tokens": {
+      "xs": { "value": "10px" },
+      "sm": { "value": "12px" },
+      "md": { "value": "20px" },
+      "lg": { "value": "24px" },
+      "xl": { "value": "32px" },
+      "2xl": { "value": "40px" }
+    }
+  },
+  "breakpoints": {
+    "mobile": { "value": "767px", "operator": "max-width" },
+    "tablet": { "min": "768px", "max": "991px" },
+    "desktop": { "min": "992px", "max": "1439px" },
+    "xl": { "value": "1440px", "operator": "min-width" }
+  },
+  "border": {
+    "default": {
+      "value": "1px solid #00000026",
+      "description": "Default card and container border in light mode."
+    }
+  }
+}
