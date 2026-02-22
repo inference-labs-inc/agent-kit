@@ -15,7 +15,7 @@ The files in this repository are served at stable URLs via the worker:
 | File | URL |
 |------|-----|
 | `llms.txt` | `https://inferencelabs.com/agent-kit/llms.txt` |
-| `inference-labs-brand-guide.md` | `https://inferencelabs.com/agent-kit/inference-labs-brand-guide.md` |
+| `brand-guide.md` | `https://inferencelabs.com/agent-kit/brand-guide.md` |
 | `design-tokens.json` | `https://inferencelabs.com/agent-kit/design-tokens.json` |
 | `agent-enquiry-api.yaml` | `https://inferencelabs.com/agent-kit/agent-enquiry-api.yaml` |
 
@@ -57,7 +57,7 @@ Full OpenAPI spec: [`agent-enquiry-api.yaml`](./agent-enquiry-api.yaml)
 | File | Purpose |
 |------|---------|
 | `llms.txt` | Primary agent discovery file — service context and enquiry protocol |
-| `inference-labs-brand-guide.md` | Full brand guide: typography, color, voice, layout rules |
+| `brand-guide.md` | Full brand guide: typography, color, voice, layout rules |
 | `design-tokens.json` | Machine-readable tokens for Tailwind, CSS-in-JS, Figma Tokens, Style Dictionary |
 | `agent-enquiry-api.yaml` | OpenAPI 3.1 spec for the agent enquiry endpoint |
 | `worker/` | Cloudflare Worker — enquiry API and file proxy |

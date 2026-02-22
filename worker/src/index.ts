@@ -117,7 +117,7 @@ const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/inference-labs-inc/ag
 const PROXIED_FILES = new Set([
   'llms.txt',
   'llms-full.txt',
-  'inference-labs-brand-guide.md',
+  'brand-guide.md',
   'design-tokens.json',
   'agent-enquiry-api.yaml',
 ]);

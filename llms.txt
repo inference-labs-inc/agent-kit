@@ -79,7 +79,7 @@ OpenAPI spec: https://raw.githubusercontent.com/inference-labs-inc/agent-kit/mai
 
 For AI agents working on design, UI, or copy tasks for Inference Labs.
 
-- [Full Brand Guide](https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/inference-labs-brand-guide.md): Colors, typography, logo, layout, spacing, voice, imagery, and terminology glossary.
+- [Full Brand Guide](https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/brand-guide.md): Colors, typography, logo, layout, spacing, voice, imagery, and terminology glossary.
 - [Design Tokens (JSON)](https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/design-tokens.json): Importable tokens for Tailwind, CSS-in-JS, Figma Tokens, or Style Dictionary.
 
 **Brand quick reference**

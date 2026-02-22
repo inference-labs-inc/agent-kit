@@ -17,7 +17,7 @@ Whitepaper: https://public.inferencelabs.com/inference-network-whitepaper.pdf
 Before writing UI code, generating copy, or producing visual assets for Inference Labs, load the brand guide:
 
 ```
-https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/inference-labs-brand-guide.md
+https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/brand-guide.md
 ```
 
 For tokens you can import directly into code:
@@ -38,10 +38,10 @@ https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/design-token
 | File | Purpose |
 |------|---------|
 | `llms.txt` | Primary agent discovery file — service context, enquiry protocol, brand index |
-| `inference-labs-brand-guide.md` | Full brand guide with prose, rules, and rationale |
+| `brand-guide.md` | Full brand guide with prose, rules, and rationale |
 | `design-tokens.json` | Machine-readable tokens for direct import into code and design tools |
 | `agent-enquiry-api.yaml` | OpenAPI spec for the planned agent enquiry endpoint |
 
 ## Keeping this repo current
 
-Notion brand kit pages require JavaScript and cannot be fetched programmatically. When they are updated, a human must review and sync the changes here. Notion source URLs are listed in `inference-labs-brand-guide.md`.
+Notion brand kit pages require JavaScript and cannot be fetched programmatically. When they are updated, a human must review and sync the changes here. Notion source URLs are listed in `brand-guide.md`.
