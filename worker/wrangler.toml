@@ -1,0 +1,9 @@
+name = "inference-labs-agent-kit"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "agent-kit-db"
+# Run `wrangler d1 create agent-kit-db` and paste the database_id here
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
