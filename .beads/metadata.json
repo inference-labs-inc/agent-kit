@@ -1,7 +1,0 @@
-{
-  "backend": "dolt",
-  "database": "dolt",
-  "dolt_database": "agent_kit",
-  "dolt_mode": "server",
-  "jsonl_export": "issues.jsonl"
-}

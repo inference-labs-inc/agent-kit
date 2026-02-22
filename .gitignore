@@ -1,5 +1,6 @@
 .runtime/
 .claude/commands/
 .logs/
+.beads/
 worker/node_modules/
 worker/.wrangler/
