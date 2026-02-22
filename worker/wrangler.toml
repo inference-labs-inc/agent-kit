@@ -5,5 +5,4 @@ compatibility_date = "2025-01-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "agent-kit-db"
-# Run `wrangler d1 create agent-kit-db` and paste the database_id here
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "e983beb4-6dcd-4ade-b0e4-a06a2f91f36d"
