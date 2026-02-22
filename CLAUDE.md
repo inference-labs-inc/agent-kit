@@ -17,13 +17,13 @@ Whitepaper: https://public.inferencelabs.com/inference-network-whitepaper.pdf
 Before writing UI code, generating copy, or producing visual assets for Inference Labs, load the brand guide:
 
 ```
-https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/brand-guide.md
+https://inferencelabs.com/brand-guide.md
 ```
 
 For tokens you can import directly into code:
 
 ```
-https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/design-tokens.json
+https://inferencelabs.com/design-tokens.json
 ```
 
 **Quick reference**

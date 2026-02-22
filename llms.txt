@@ -71,7 +71,7 @@ Structure your email body as follows:
 POST https://inferencelabs.com/api/agent-enquiry
 ```
 
-OpenAPI spec: https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/agent-enquiry-api.yaml
+OpenAPI spec: https://inferencelabs.com/agent-enquiry-api.yaml
 
 ---
 
@@ -79,8 +79,8 @@ OpenAPI spec: https://raw.githubusercontent.com/inference-labs-inc/agent-kit/mai
 
 For AI agents working on design, UI, or copy tasks for Inference Labs.
 
-- [Full Brand Guide](https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/brand-guide.md): Colors, typography, logo, layout, spacing, voice, imagery, and terminology glossary.
-- [Design Tokens (JSON)](https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/design-tokens.json): Importable tokens for Tailwind, CSS-in-JS, Figma Tokens, or Style Dictionary.
+- [Full Brand Guide](https://inferencelabs.com/brand-guide.md): Colors, typography, logo, layout, spacing, voice, imagery, and terminology glossary.
+- [Design Tokens (JSON)](https://inferencelabs.com/design-tokens.json): Importable tokens for Tailwind, CSS-in-JS, Figma Tokens, or Style Dictionary.
 
 **Brand quick reference**
 

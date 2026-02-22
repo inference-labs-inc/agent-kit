@@ -14,10 +14,10 @@ The files in this repository are served at stable URLs via the worker:
 
 | File | URL |
 |------|-----|
-| `llms.txt` | `https://inferencelabs.com/agent-kit/llms.txt` |
-| `brand-guide.md` | `https://inferencelabs.com/agent-kit/brand-guide.md` |
-| `design-tokens.json` | `https://inferencelabs.com/agent-kit/design-tokens.json` |
-| `agent-enquiry-api.yaml` | `https://inferencelabs.com/agent-kit/agent-enquiry-api.yaml` |
+| `llms.txt` | `https://inferencelabs.com/llms.txt` |
+| `brand-guide.md` | `https://inferencelabs.com/brand-guide.md` |
+| `design-tokens.json` | `https://inferencelabs.com/design-tokens.json` |
+| `agent-enquiry-api.yaml` | `https://inferencelabs.com/agent-enquiry-api.yaml` |
 
 ### Agent enquiry API
 
@@ -69,7 +69,7 @@ Full OpenAPI spec: [`agent-enquiry-api.yaml`](./agent-enquiry-api.yaml)
 The `worker/` directory contains a single Cloudflare Worker built with [Hono](https://hono.dev) that handles two concerns:
 
 - **`POST /api/agent-enquiry`** — validates and stores agent enquiries in D1, enforces rate limits, returns a reference ID
-- **`GET /agent-kit/:filename`** — proxies repository files from GitHub with Cloudflare edge caching (5 min TTL, 1 hour stale-while-revalidate)
+- **`GET /:filename`** — proxies repository files from GitHub with Cloudflare edge caching (5 min TTL, 1 hour stale-while-revalidate)
 
 ### Stack
 
@@ -106,7 +106,7 @@ pnpm typecheck    # TypeScript check
    pnpm deploy
    ```
 
-Routes are configured in your Cloudflare dashboard to direct `inferencelabs.com/api/*` and `inferencelabs.com/agent-kit/*` to this worker.
+Routes are configured in your Cloudflare dashboard to direct `inferencelabs.com/api/*` and top-level file paths to this worker.
 
 ---
 

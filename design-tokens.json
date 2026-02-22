@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "description": "Machine-readable design tokens for Inference Labs / Inference Network. Import into Tailwind, CSS-in-JS, Figma Tokens, or Style Dictionary.",
     "sources": {
-      "brandGuide": "https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/brand-guide.md",
+      "brandGuide": "https://inferencelabs.com/brand-guide.md",
       "notionBrandKit": "https://inferencelabs.notion.site/brandkit",
       "website": "https://inferencelabs.com"
     }
