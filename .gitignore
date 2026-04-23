@@ -4,3 +4,4 @@
 .beads/
 worker/node_modules/
 worker/.wrangler/
+node_modules/

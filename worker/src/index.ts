@@ -118,6 +118,7 @@ const PROXIED_FILES = new Set([
   'llms.txt',
   'llms-full.txt',
   'brand-guide.md',
+  'DESIGN.md',
   'design-tokens.json',
   'agent-enquiry-api.yaml',
 ]);

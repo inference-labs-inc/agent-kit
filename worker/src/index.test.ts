@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, beforeEach } from 'vitest';
+import { describe, it, expect, beforeAll, beforeEach, afterEach, vi } from 'vitest';
 import { env, SELF } from 'cloudflare:test';
 
 declare module 'cloudflare:test' {
@@ -57,6 +57,10 @@ beforeAll(async () => {
 beforeEach(async () => {
   await env.DB.prepare('DELETE FROM enquiries').run();
   await env.DB.prepare('DELETE FROM rate_limits').run();
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
 });
 
 describe('POST /api/agent-enquiry', () => {
@@ -185,5 +189,32 @@ describe('POST /api/agent-enquiry', () => {
       expect(body.error).toBe('rate_limit_exceeded');
       expect(body.message).toBeTypeOf('string');
     });
+  });
+});
+
+describe('GET /:filename', () => {
+  it('proxies DESIGN.md when requested', async () => {
+    const upstreamFetch = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response('# DESIGN.md\n', {
+        status: 200,
+        headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
+      })
+    );
+
+    const res = await SELF.fetch(`${BASE_URL}/DESIGN.md`);
+
+    expect(res.status).toBe(200);
+    expect(await res.text()).toBe('# DESIGN.md\n');
+    expect(res.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
+    expect(upstreamFetch).toHaveBeenCalledWith(
+      'https://raw.githubusercontent.com/inference-labs-inc/agent-kit/main/DESIGN.md'
+    );
+  });
+
+  it('returns 404 for files outside the allowlist', async () => {
+    const res = await SELF.fetch(`${BASE_URL}/not-allowed.md`);
+
+    expect(res.status).toBe(404);
+    expect(await res.json<{ error: string }>()).toMatchObject({ error: 'not_found' });
   });
 });
