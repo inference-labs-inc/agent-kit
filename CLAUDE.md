@@ -20,10 +20,10 @@ Before writing UI code, generating copy, or producing visual assets for Inferenc
 https://inferencelabs.com/brand-guide.md
 ```
 
-For tokens you can import directly into code:
+For the structured design system:
 
 ```
-https://inferencelabs.com/design-tokens.json
+https://inferencelabs.com/DESIGN.md
 ```
 
 **Quick reference**
@@ -39,7 +39,7 @@ https://inferencelabs.com/design-tokens.json
 |------|---------|
 | `llms.txt` | Primary agent discovery file — service context, enquiry protocol, brand index |
 | `brand-guide.md` | Full brand guide with prose, rules, and rationale |
-| `design-tokens.json` | Machine-readable tokens for direct import into code and design tools |
+| `DESIGN.md` | Structured design system with tokens and usage guidance |
 | `agent-enquiry-api.yaml` | OpenAPI spec for the planned agent enquiry endpoint |
 
 ## Keeping this repo current

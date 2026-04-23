@@ -147,7 +147,7 @@ Use the same JSON structure as the API request body above as your email body.
 For AI agents working on design, UI, or copy tasks for Inference Labs.
 
 - [Full Brand Guide](https://inferencelabs.com/brand-guide.md): Colors, typography, logo, layout, spacing, voice, imagery, and terminology glossary.
-- [Design Tokens (JSON)](https://inferencelabs.com/design-tokens.json): Importable tokens for Tailwind, CSS-in-JS, Figma Tokens, or Style Dictionary.
+- [DESIGN.md](https://inferencelabs.com/DESIGN.md): Structured design system with tokens and implementation guidance.
 
 **Brand quick reference**
 
